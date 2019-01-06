@@ -1,0 +1,124 @@
+{
+	"_version": "1.7.0",
+	"start_url": "start.html",
+	"sap.app": {
+		"id": "com.fiorielements.overviewpage.fiorielements_overviewpage",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{app_title}}",
+		"description": "{{app_description}}",
+		"dataSources": {
+			"mainDataSource": {
+				"uri": "/WXV_QEX_S4HANA_1709/sap/opu/odata/sap/Z_INVOICE_ITEMS_CDS/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/mainDataSource/metadata.xml",
+					"annotations": [
+						"annotation0"
+					]
+				}
+			},
+			"annotation0": {
+				"type": "ODataAnnotation",
+				"uri": "localService/annotation0.xml",
+				"settings": {
+					"localUri": "localService/annotation0.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "OVP.cardtemplate",
+			"version": "0.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "${sap.ui5.dist.version}",
+			"libs": {
+				"sap.ovp": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"@i18n": {
+				"preload": true,
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"mainDataSource": {
+				"dataSource": "mainDataSource",
+				"settings": {
+					"defaultCountMode": "Inline"
+				}
+			}
+		},
+		"extends": {
+			"extensions": {}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ovp": {
+		"globalFilterModel": "mainDataSource",
+		"globalFilterEntityType": "curreny_code",
+		"cards": {
+			"card00": {
+				"model": "mainDataSource",
+				"template": "sap.ovp.cards.table",
+				"settings": {
+					"title": "{{card00_title}}",
+					"subTitle": "{{card00_subTitle}}",
+					"entitySet": "Z_Invoice_Items",
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem"
+				}
+			},
+			"card01": {
+				"model": "mainDataSource",
+				"template": "sap.ovp.cards.list",
+				"settings": {
+					"title": "{{card00_title}}",
+					"listType": "extended",
+					"listFlavor": "standard",
+					"sortBy": "currencyCode",
+					"sortOrder": "ascending",
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem",
+					"entitySet": "Z_Invoice_Items"
+				}
+			},
+			"card02": {
+				"model": "mainDataSource",
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{card00_title}}",
+					"entitySet": "Z_Invoice_Items",
+					"chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#ColumnTime",
+					"presentationAnnotationPath" : "com.sap.vocabularies.UI.v1.PresentationVariant",
+					"identificationAnnotationPath" : "com.sap.vocabularies.UI.v1.Identification"
+				}
+			}
+		}
+	}
+}
